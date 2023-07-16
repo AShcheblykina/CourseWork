@@ -1,3 +1,4 @@
+package ru.netology.tests;
 import com.codeborne.selenide.Condition;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
@@ -12,7 +13,7 @@ public class TransferTestNegative {
     void testInvalidCard() {
         open("http://localhost:8080");
         $(byText("Купить в кредит")).click();
-        $("[placeholder='0000 0000 0000 0000']").setValue("rgssrgfdgdfhdfhr");
+        $("[placeholder='0000 0000 0000 0000']").setValue("kkkk kkkk kkkk kkkk");
         $("[placeholder='08']").setValue("12");
         $("[placeholder='22']").setValue("23");
         $$(By.className("input__control")).get(3).setValue("Микки Маус");
@@ -20,7 +21,19 @@ public class TransferTestNegative {
         $(byText("Продолжить")).click();
         $(byText("Неверный формат")).shouldBe(Condition.visible, Duration.ofSeconds(15));
     }
+    @Test
+    void testInvalidCardNumber() {
+        open("http://localhost:8080");
+        $(byText("Купить в кредит")).click();
+        $("[placeholder='0000 0000 0000 0000']").setValue("0000 0000 0000 0000");
+        $("[placeholder='08']").setValue("12");
+        $("[placeholder='22']").setValue("23");
+        $$(By.className("input__control")).get(3).setValue("Минни Маус");
+        $$(By.className("input__control")).get(4).setValue("100");
+        $(byText("Продолжить")).click();
+        $x("(//*[@class='notification__icon'])[1]").shouldBe(Condition.visible, Duration.ofSeconds(17));
 
+}
     @Test
     void testInvalidMouth() {
         open("http://localhost:8080");
@@ -47,6 +60,7 @@ public class TransferTestNegative {
         $(byText("Истёк срок действия карты")).shouldBe(Condition.visible, Duration.ofSeconds(15));
 
     }
+
     @Test
     void testInvalidName() {
         open("http://localhost:8080");
@@ -60,6 +74,7 @@ public class TransferTestNegative {
         $(byText("Укажите корректные данные владельца карты")).shouldBe(Condition.visible, Duration.ofSeconds(15));
 
     }
+
     @Test
     void testInvalidCVC() {
         open("http://localhost:8080");
@@ -67,10 +82,10 @@ public class TransferTestNegative {
         $("[placeholder='0000 0000 0000 0000']").setValue("5555 6666 7777 8888");
         $("[placeholder='08']").setValue("12");
         $("[placeholder='22']").setValue("23");
-        $$(By.className("input__control")).get(3).setValue("Иван");
+        $$(By.className("input__control")).get(3).setValue("Эрих Мария Ремарк");
         $$(By.className("input__control")).get(4).setValue("ЦУВ");
         $(byText("Продолжить")).click();
         $(byText("Неверный формат")).shouldBe(Condition.visible, Duration.ofSeconds(15));
-
     }
+
 }
