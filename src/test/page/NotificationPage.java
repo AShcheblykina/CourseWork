@@ -1,4 +1,4 @@
-package ru.netology.page
+
 import static com.codeborne.selenide.Selenide.$;
 
 public class NotificationPage {

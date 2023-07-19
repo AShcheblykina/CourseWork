@@ -1,4 +1,5 @@
-package ru.netology.tests;
+
+
 import com.codeborne.selenide.Condition;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
@@ -21,6 +22,7 @@ public class TransferTestNegative {
         $(byText("Продолжить")).click();
         $(byText("Неверный формат")).shouldBe(Condition.visible, Duration.ofSeconds(15));
     }
+
     @Test
     void testInvalidCardNumber() {
         open("http://localhost:8080");
@@ -33,7 +35,8 @@ public class TransferTestNegative {
         $(byText("Продолжить")).click();
         $x("(//*[@class='notification__icon'])[1]").shouldBe(Condition.visible, Duration.ofSeconds(17));
 
-}
+    }
+
     @Test
     void testInvalidMouth() {
         open("http://localhost:8080");
