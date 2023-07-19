@@ -1,13 +1,13 @@
 package ru.netology.tests;
 
+import com.codeborne.selenide.Selenide;
 import org.junit.jupiter.api.Test;
-
-import static com.codeborne.selenide.Selenide.open;
+import ru.netology.page.VerificationPage;
 
 public class TransferTestPositive {
     @Test
     void testPaymentCredit() {
-        open("http://localhost:8080");
+        Selenide.open("http://localhost:8080");
         var verificationPage = new VerificationPage();
 
 

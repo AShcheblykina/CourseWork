@@ -1,6 +1,10 @@
-
+package ru.netology.data;
 
 import com.github.javafaker.Faker;
+import lombok.Value;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class FormData {
     private FormData(String cardNumber, String month, String year, String name, String cvc) {
@@ -25,19 +29,19 @@ public class FormData {
     }
 
     public static Info getRandomInfo() {
-        return new Info(generatecardNumber(), generatemonth(4), generateyear(3), generatename(), generateCvc());
+        return new Info(generatecardNumber(), generatemonth(4), generateyear(3), generatename("en"), generateCvc());
     }
 
     private static Faker faker;
 
     public static String generatecardNumber() {
         faker = new Faker();
-        String randomCardNumber = faker.busines().cardNumber();
+        String randomCardNumber = faker.business().creditCardNumber();
         return randomCardNumber;
     }
 
     public static String generatemonth(int shift) {
-        return LocalDate.now().plusMonths(shift).format(DataTimeFormatter.ofPattern("MM"));
+        return LocalDate.now().plusMonths(shift).format(DateTimeFormatter.ofPattern("MM"));
     }
 
     public static String generateyear(int shift) {
@@ -51,7 +55,7 @@ public class FormData {
     }
 
     public static String generateCvc() {
-        String randomCvc = facker.numerify("###");
+        String randomCvc = faker.numerify("###");
         return randomCvc;
     }
 }
