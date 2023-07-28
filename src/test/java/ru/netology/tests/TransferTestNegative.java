@@ -5,6 +5,7 @@ import com.codeborne.selenide.Selectors;
 import com.codeborne.selenide.Selenide;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
+import ru.netology.page.VerificationPage;
 
 import java.time.Duration;
 
@@ -12,14 +13,24 @@ public class TransferTestNegative {
     @Test
     void testInvalidCard() {
         Selenide.open("http://localhost:8080");
-        Selenide.$(Selectors.byText("Купить в кредит")).click();
-        Selenide.$("[placeholder='0000 0000 0000 0000']").setValue("kkkk kkkk kkkk kkkk");
-        Selenide.$("[placeholder='08']").setValue("12");
-        Selenide.$("[placeholder='22']").setValue("23");
-        Selenide.$$(By.className("input__control")).get(3).setValue("Микки Маус");
-        Selenide.$$(By.className("input__control")).get(4).setValue("111");
-        Selenide.$(Selectors.byText("Продолжить")).click();
-        Selenide.$(Selectors.byText("Неверный формат")).shouldBe(Condition.visible, Duration.ofSeconds(15));
+        var verificationPage = new VerificationPage();
+        verificationPage.initialize();
+        verificationPage.infoCardPositive();
+
+
+
+
+        verificationPage.infoCardNegativeString();
+
+
+//        Selenide.$(Selectors.byText("Купить в кредит")).click();
+//        Selenide.$("[placeholder='0000 0000 0000 0000']").setValue("kkkk kkkk kkkk kkkk");
+//        Selenide.$("[placeholder='08']").setValue("12");
+//        Selenide.$("[placeholder='22']").setValue("23");
+//        Selenide.$$(By.className("input__control")).get(3).setValue("Микки Маус");
+//        Selenide.$$(By.className("input__control")).get(4).setValue("111");
+//        Selenide.$(Selectors.byText("Продолжить")).click();
+//        Selenide.$(Selectors.byText("Неверный формат")).shouldBe(Condition.visible, Duration.ofSeconds(15));
     }
 
     @Test
